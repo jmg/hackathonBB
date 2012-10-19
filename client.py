@@ -1,30 +1,25 @@
-from urllib import urlencode
 import requests
 import simplejson as json
+
 
 class Client(object):
 
     BASE_URL = "https://www.buxfer.com/api"
+    LOGIN_URL = "%s/login.json" % BASE_URL
 
     def __init__(self, user, password):
 
-        self.user = user
-        self.password = password
+        self.user = {"userid": user, "password": password }
         self.login()
 
     def login(self):
 
-        login_url = self.get_login_url()
-        data = self.get_response(login_url)
+        data = self.get_response(self.LOGIN_URL, self.user)
         self.token = data["token"]
 
-    def get_login_url(self):
+    def get_response(self, url, params={}):
 
-        return self.BASE_URL + "/login.json?userid=" + self.user + "&password=" + self.password
-
-    def get_response(self, url):
-
-        response = requests.get(url)
+        response = requests.get(url, params=params)
         data = json.loads(response.text)
         data = data["response"]
         if data["status"] != "OK":
@@ -35,7 +30,6 @@ class Client(object):
     def get(self, name, params={}):
 
         params["token"] = self.token
-        qs = urlencode(params)
 
-        url = "%s/%s.json?%s" % (self.BASE_URL, name, qs)
-        return self.get_response(url)
+        url = "%s/%s.json" % (self.BASE_URL, name)
+        return self.get_response(url, params)
