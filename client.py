@@ -1,3 +1,4 @@
+from urllib import urlencode
 import requests
 import simplejson as json
 
@@ -31,7 +32,10 @@ class Client(object):
 
         return data
 
-    def get(self, name):
+    def get(self, name, params={}):
 
-        url = "%s/%s.json?token=%s" % (self.BASE_URL, name, self.token)
+        params["token"] = self.token
+        qs = urlencode(params)
+
+        url = "%s/%s.json?%s" % (self.BASE_URL, name, qs)
         return self.get_response(url)
