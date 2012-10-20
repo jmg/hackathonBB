@@ -100,7 +100,7 @@ def change_password():
 @app.route("/report/progress/", methods=["GET"])
 def progress():
     try:
-        return response_success(data=User.get(_id=get_user()['_id']).progress())
+        return response_success(data={'progress':User.get(_id=get_user()['_id']).progress()})
     except:
         return response_error()
 
@@ -119,14 +119,14 @@ def expenses_by_tag(tag):
     except:
         return response_error()
 
-@app.route("/report/expenses/top/", methods=["GET"])
+@app.route("/report/expenses_top/", methods=["GET"])
 def top_expenses():
     try:
         return response_success(data=Expense.top(user_id=get_user()['_id']))
     except:
         return response_error()
 
-@app.route("/report/expenses/top/<tag>/", methods=["GET"])
+@app.route("/report/expenses_top/<tag>/", methods=["GET"])
 def top_expenses_for(tag):
     try:
         return response_success(data=Expense.top(tag=tag, user_id=get_user()['_id']))
