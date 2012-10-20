@@ -15,6 +15,8 @@ def save(entity_class, request, entity_id=None):
     else:
         entity = entity_class(**clean_data(request.form))
 
+    entity["user_id"] = get_user()["_id"]
+
     try:
         _, saved = entity.save()
     except ValidationException, e:
@@ -25,7 +27,7 @@ def save(entity_class, request, entity_id=None):
 def get(entity_class, id):
 
     try:
-        entity = entity_class.get(_id=id)
+        entity = entity_class.get(_id=id, user_id=get_user()["_id"])
     except NotFoundException, e:
         return response_error()
 
