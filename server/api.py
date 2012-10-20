@@ -5,11 +5,11 @@ from flask import request, Response
 
 from models import *
 from utils import *
-from crud import *
+import crud
 
 def get_resource_class(resource):
 
-    return globals.get(resource.capitalize())
+    return globals().get(resource.capitalize())
 
 @app.route("/<resource>/", methods=["POST"])
 def create_expense(resource):

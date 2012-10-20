@@ -1,7 +1,7 @@
 from utils import *
 from mongomodels.models.exceptions import ValidationException, NotFoundException
 
-def save(self, entity_class, request, entity_id=None):
+def save(entity_class, request, entity_id=None):
     
     if entity_id is not None:
         entity = entity_class.get(_id=entity_id)
@@ -16,7 +16,7 @@ def save(self, entity_class, request, entity_id=None):
 
     return response_success(params={'data': entity.json})
 
-def get(self, entity_class, id):
+def get(entity_class, id):
     
     try:
         entity = entity_class.get(_id=id)
@@ -25,7 +25,7 @@ def get(self, entity_class, id):
 
     return entity.json_string
 
-def delete(self, entity_class, id):
+def delete(entity_class, id):
     
     try:
         entity = entity_class.get(_id=id)
