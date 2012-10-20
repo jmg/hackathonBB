@@ -59,10 +59,6 @@ def change_password():
     user.save()
     return response_success()
 
-@app.route("/report/")
-def report():
-    pass
-
 @app.route("/report/progress/<user_id>/", methods=["GET"])
 def progress(user_id):
     try:
