@@ -5,7 +5,7 @@ from flask import request, Response
 
 from models import *
 from utils import *
-from crud import crud
+from crud import *
 
 def get_resource_class(resource):
 
