@@ -3,20 +3,39 @@ from base import TestApiBase
 
 class ExpenseTest(TestApiBase):
 
-    def test_crud(self):
+    def setUp(self):
 
-        response = self.get_json_from_post("/expense/", {"cost": 100, "name": "test", "user_id": self.user._id })
-        self.assertEquals(response["success"], "ok")
+        TestApiBase.setUp(self)
+        self.expense = self.create()["data"]
 
-        response = self.get_json_from_get("/expense/1/")
-        self.assertEquals(response["data"]["name"], "test")
-        self.assertEquals(response["data"]["password"], "test")
+    def create(self):
 
-        response = get_json_from_request("/expense/1/", {"name": "new_value"}, method="put")
-        self.assertEquals(response["success"], "ok")
+        return self.get_json_from_post("/expense/", {"cost": 100, "name": "test", "user_id": self.user._id, "time": "test" })
 
-        response = self.get_json_from_get("/expense/1/")
-        self.assertEquals(response["data"]["name"], "new_value")
+    def test_create(self):
 
-        response = self.get_json_from_request("/expense/1/", method="delete")
-        self.assertEquals(response["success"], "ok")
+        response = self.create()
+        self.assertEquals(response["status"], "ok")
+
+    def test_get(self):
+
+        response = self.get_json_from_get("/expense/%s/" % self.expense["_id"])
+        self.assertEquals(response["name"], ["test"])
+        self.assertEquals(response["cost"], ["100"])
+
+    def test_update(self):
+
+        response = self.get_json_from_request("/expense/%s/" % self.expense["_id"], {"name": "new_value"}, method="put")
+        self.assertEquals(response["status"], "ok")
+
+        response = self.get_json_from_get("/expense/%s/" % self.expense["_id"])
+        self.assertEquals(response["name"], "new_value")
+
+    def test_delete(self):
+
+        self.new_expense = self.create()["data"]
+        response = self.get_json_from_request("/expense/%s/" % self.new_expense["_id"], method="delete")
+        self.assertEquals(response["status"], "ok")
+
+        response = self.get_json_from_get("/expense/%s/" % self.new_expense["_id"])
+        self.assertEquals(response["status"], "error")

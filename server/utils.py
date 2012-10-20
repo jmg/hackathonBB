@@ -1,3 +1,5 @@
+import simplejson as json
+
 def check_auth(username, password):
     return True
 
@@ -17,17 +19,17 @@ def requires_auth(f):
         return f(*args, **kwargs)
     return decorated
 
-def response_error(self, params={}):
+def response_error(params={}):
 
     params["status"] = "error"
     return json.dumps(params)
 
-def response_success(self, params={}):
+def response_success(params={}):
 
     params["status"] = "ok"
     return json.dumps(params)
 
-def json_response(self, params={}, success=True):
+def json_response(params={}, success=True):
     
     if success:
         return response_success(params=params)

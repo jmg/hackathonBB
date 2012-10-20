@@ -19,7 +19,7 @@ class TestApiBase(unittest.TestCase):
     def get_json_from_post(self, url, data):
         return json.loads(self.client.post(url, data=data).data)
 
-    def get_json_from_request(self, url, data={}, method="post"):
+    def get_json_from_request(self, url, data={}, method="get"):
         return json.loads(getattr(self.client, method)(url, data=data).data)
 
     def get_json_from_get(self, url):
