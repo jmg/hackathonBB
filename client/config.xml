@@ -51,6 +51,7 @@
 	</rim:permissions>
 		<rim:permit>use_camera</rim:permit>
 
+  <access uri="http://173.255.241.184:4321" subdomains="true" />
 	<!--
 		Universal APIs:
 			The following features are available on both Smartphone and Tablet OS

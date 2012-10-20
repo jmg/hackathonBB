@@ -1,9 +1,8 @@
 		<script type="text/javascript" src="js/menu.js"></script>
-		<script type="text/javascript" src="js/add.js"></script>
 
 		<div data-bb-type="pill-buttons">
           <div data-bb-type="pill-button" data-bb-selected="true" onclick="selectAdd()">Add</div>
-          <div data-bb-type="pill-button" onclick="selectEdit()">Edit</div>
+          <div data-bb-type="pill-button" onclick="selectEdit()">List</div>
           <div data-bb-type="pill-button" onclick="selectReports()">Reports</div>
           <div data-bb-type="pill-button" onclick="selectConfig()">Config</div>
     </div>
@@ -18,7 +17,7 @@
 			<div data-bb-type="panel-header">Add</div>
 
 			<div data-bb-type="label-control-container">
-				<select data-bb-style="stretch" id="trantype">
+				<select data-bb-style="stretch" id="add-type">
           <option value="expense" selected="true">Expense</option>
           <option value="income">Income</option>
           <option value="savings">Savings</option>
@@ -27,15 +26,19 @@
 			<div data-bb-type="label-control-container">
 				<div data-bb-type="row">
 					<div data-bb-type="label">Amount</div>
-					<input type="text" value="$$$" />
+					<input type="text" placeholder="$$$" id="add-amount" />
 				</div>
 				<div data-bb-type="row">
 					<div data-bb-type="label">Description</div>
-					<input type="text" value="Lunch" />
+					<input type="text" placeholder="for example: Lunch" id="add-desc" />
+				</div>
+				<div data-bb-type="row">
+					<div data-bb-type="label">Fecha</div>
+					<input type="date" value="2012-10-20" id="add-date" />
 				</div>
 				<div data-bb-type="row">
 					<div data-bb-type="label">Tag</div>
-					<select data-bb-style="stretch" id="trantype">
+					<select data-bb-style="stretch" id="add-tag">
          		<option value="food" selected="true">Food</option>
          		<option value="fun">Fun</option>
          		<option value="trips">Trips</option>
@@ -48,19 +51,15 @@
 		</div>
 
 		<!-- Edit page -->
-		<script type="text/javascript">
- 		jQuery(document).ready(function() {
-        jQuery( "#sortable" ).sortable();
-        jQuery( "#sortable" ).disableSelection();
-    });
-		</script>
 		<div data-bb-type="round-panel" id="page-edit" style="display:none;">
-			<div data-bb-type="panel-header">Edit your transactions</div>
+			<div data-bb-type="panel-header">Your transactions</div>
 			<div data-bb-type="label-control-container">
-				<ul id="sortable">
-					<li class="ui-state-default">Food</li>
-					<li class="ui-state-default">Fun</li>
-				</ul>
+					<table id="view-list">
+						<tr><td>Almuerzo - $35</td></tr>
+						<tr><td>Almuerzo - $35</td></tr>
+						<tr><td>Almuerzo - $35</td></tr>
+						<tr><td>Almuerzo - $35</td></tr>
+					</table>
 			</div>
 
 		</div>
@@ -69,10 +68,8 @@
 		<div data-bb-type="round-panel" id="page-reports" style="display:none;">
 			<div data-bb-type="panel-header">Reports</div>
 			<div data-bb-type="label-control-container">
-				<ol>
-					<li>Food</li>
-					<li>Fun</li>
-				</ol>
+				<div id="report-area">
+				</div>
 			</div>
 		</div>
 
@@ -88,6 +85,7 @@
 					<div data-bb-type="label">Password</div>
 					<input type="password" value="Lunch" />
 				</div>
+			<div data-bb-type="button" onclick="alert('saving')" >Save</div>
 
 		</div>
 
