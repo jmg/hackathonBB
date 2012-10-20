@@ -34,9 +34,12 @@ def get(entity_class, id):
     return entity.json_string
 
 
-def all(entity_class, id):
+def all(entity_class, request=None, **kwargs):
 
-    return entity_class.all_json(user_id=get_user()["_id"])
+    if request is not None:
+        kwargs.update(clean_data(request.form))
+
+    return entity_class.all_json(user_id=get_user()["_id"], **kwargs)
 
 
 def delete(entity_class, id):
