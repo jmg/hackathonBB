@@ -2,7 +2,7 @@ var BASE_URL = "173.255.241.184:4321";
 
 function login(username, password) {
   $.ajax({
-    type: "GET",
+    type: "POST",
     url: BASE_URL + "/login/",
     data: {
       username: username,
