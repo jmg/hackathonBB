@@ -1,4 +1,0 @@
-hackathonBB
-===========
-
-BB Jam Sessions
