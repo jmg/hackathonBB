@@ -13,7 +13,7 @@ def save(entity_class, request, entity_id=None):
         _, saved = entity.save()
     except ValidationException, e:
         return response_error()
-
+    
     return response_success(params={'data': entity.json})
 
 def get(entity_class, id):
@@ -26,7 +26,7 @@ def get(entity_class, id):
     return entity.json_string
 
 def delete(entity_class, id):
-    
+    import pdb; pdb.set_trace()
     try:
         entity = entity_class.get(_id=id)
         entity.delete()

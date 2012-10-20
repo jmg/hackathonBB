@@ -1,11 +1,6 @@
-from models.base import BaseModel
-from models.user import User
+from models.movement import Movement
 
 
-class Expense(BaseModel):
+class Expense(Movement):
 
-    def validate(self):
-        self.validate_not_empty('cost')
-        self.validate_not_empty('name')
-        self.validate_not_empty('time')
-        self.validate_existance('user_id', User)
+    pass
