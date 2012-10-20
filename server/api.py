@@ -3,26 +3,34 @@ from app import app
 from functools import wraps
 from flask import request, Response
 
+from models import *
+from utils import *
+from crud import *
 
-def check_auth(username, password):
-    return True
+def get_resource_class(resource):
 
-def authenticate():
-    """Sends a 401 response that enables basic auth"""
-    return Response(
-    'Could not verify your access level for that URL.\n'
-    'You have to login with proper credentials', 401,
-    {'WWW-Authenticate': 'Basic realm="Login Required"'})
+    return globals.get(resource.capitalize())
 
-def requires_auth(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-        auth = request.authorization
-        if not auth or not check_auth(auth.username, auth.password):
-            return authenticate()
-        return f(*args, **kwargs)
-    return decorated
+@app.route("/<resource>/", methods=["POST"])
+def create_expense(resource):
 
-@app.route("/")
-def budgets():
-    return "hola mundo"
+    resource_class = get_resource_class(resource)
+    return crud.save(resource_class, request)
+
+@app.route("/<resource>/<entity_id>/", methods=["GET"])
+def get_expense(resource, entity_id):
+
+    resource_class = get_resource_class(resource)
+    return crud.get(resource_class, entity_id)
+
+@app.route("/<resource>/<entity_id>/", methods=["PUT"])
+def update_expense(resource, entity_id):
+
+    resource_class = get_resource_class(resource)
+    return crud.save(resource_class, request, entity_id=entity_id)
+
+@app.route("/<resource>/<entity_id>/", methods=["DELETE"])
+def delete_expense(resource, entity_id):
+
+    resource_class = get_resource_class(resource)
+    return crud.delete(resource_class, entity_id)
