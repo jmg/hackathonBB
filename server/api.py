@@ -62,3 +62,14 @@ def change_password():
 @app.route("/report/")
 def report():
     pass
+
+@app.route("/report/progress/<user_id>/", methods=["GET"])
+def progress(user_id):
+    try:
+        return response_success(data=User.get(_id=user_id).progress())
+    except:
+        return response_error()
+
+@app.route("/tags/", methods=["GET"])
+def tags():
+    return response_success(data=Tag.all_json())

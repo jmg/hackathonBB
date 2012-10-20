@@ -1,2 +1,2 @@
-from expense import ExpenseTest
 from auth import AuthTest
+from movement import ExpenseTest, IncomeTest

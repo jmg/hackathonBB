@@ -1,5 +1,11 @@
-import simplejson as json
 from flask import request, Response, session
+
+try:
+    import simplejson as json
+except ImportError:
+    import json
+
+from functools import wraps
 
 def check_auth(username, password):
     return True
