@@ -42,6 +42,18 @@ def delete_entity(resource, entity_id):
     resource_class = get_resource_class(resource)
     return crud.delete(resource_class, entity_id)
 
+@app.route("/account/create/", methods=["POST"])
+def create_account():
+
+    username = request.form.get("username")
+    password = request.form.get("password")
+
+    user = User(username=username, password=password)
+    user.save()
+
+    set_user(user)
+    return response_success()
+
 @app.route("/login/", methods=["POST"])
 def login():
 
