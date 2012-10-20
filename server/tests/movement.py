@@ -41,6 +41,13 @@ class MovementTest(TestApiBase):
         response = self.get_json_from_get("/%s/%s/" % (self.movement_type, self.new_movement["_id"]))
         self.assertEquals(response["status"], "error")
 
+    def test_all(self):
+        
+        response = self.get_json_from_get("/%s/" % (self.movement_type))
+        self.assertEquals(response["status"], "ok")
+        self.assertEquals(type(response["data"]), list)
+
+
 class ExpenseTest(MovementTest):
     movement_type = 'expense'
 

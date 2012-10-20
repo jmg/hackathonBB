@@ -12,6 +12,12 @@ def get_resource_class(resource):
 
     return globals().get(resource.capitalize())
 
+@app.route("/<resource>/", methods=["GET"])
+def list_entity(resource):
+
+    resource_class = get_resource_class(resource)
+    return response_success(params={"data":crud.all(resource_class, request)})
+
 @app.route("/<resource>/", methods=["POST"])
 def create_entity(resource):
 

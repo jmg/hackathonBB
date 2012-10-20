@@ -33,6 +33,12 @@ def get(entity_class, id):
 
     return entity.json_string
 
+
+def all(entity_class, id):
+
+    return entity_class.all_json(user_id=get_user()["_id"])
+
+
 def delete(entity_class, id):
 
     try:
