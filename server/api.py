@@ -100,7 +100,7 @@ def change_password():
 @app.route("/report/progress/", methods=["GET"])
 def progress():
     try:
-        return response_success(data=User.get(_id=get_user()['_id']).progress())
+        return response_success(data={'progress':User.get(_id=get_user()['_id']).progress()})
     except:
         return response_error()
 
