@@ -1,4 +1,5 @@
 import simplejson as json
+from flask import request, Response, session
 
 def check_auth(username, password):
     return True
@@ -34,3 +35,10 @@ def json_response(params={}, success=True):
     if success:
         return response_success(params=params)
     return response_error(params=params)
+
+def get_user():
+    return session["authorization"]
+
+def set_user(user):
+    session["authorization"] = user
+

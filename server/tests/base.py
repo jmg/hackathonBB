@@ -9,13 +9,16 @@ from models import User
 
 class TestApiBase(unittest.TestCase):
 
+    def create_user(self):
+        self.user = User(username="test", password="test", email="test@test.com")
+        self.user.save()
+
     def setUp(self):
 
         app.testing = True
         self.client = app.test_client()
-        self.user = User(username="test", password="test", email="test@test.com")
-        self.user.save()
-
+        self.create_user()
+        
     def get_json_from_post(self, url, data):
         return json.loads(self.client.post(url, data=data).data)
 

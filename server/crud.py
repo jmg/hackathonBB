@@ -26,7 +26,7 @@ def get(entity_class, id):
     return entity.json_string
 
 def delete(entity_class, id):
-    import pdb; pdb.set_trace()
+    
     try:
         entity = entity_class.get(_id=id)
         entity.delete()

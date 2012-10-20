@@ -1,7 +1,8 @@
 from app import app
 
 from functools import wraps
-from flask import request, Response
+from flask import request, Response, session
+from mongomodels.models.exceptions import ValidationException, NotFoundException
 
 from models import *
 from utils import *
@@ -34,6 +35,29 @@ def delete_entity(resource, entity_id):
 
     resource_class = get_resource_class(resource)
     return crud.delete(resource_class, entity_id)
+
+@app.route("/login/", methods=["POST"])
+def login():
+
+    username = request.form.get("username")
+    password = request.form.get("password")
+
+    try:
+        user = User.get(username=username, password=password)
+    except NotFoundException, e:
+        user = User(username=username, password=password)
+        user.save()
+
+    set_user(user)
+    return response_success()
+
+@app.route("/password/change/", methods=["POST"])
+def change_password():
+
+    user = get_user()
+    user.password = request.form.get("password")
+    user.save()
+    return response_success()
 
 @app.route("/report/")
 def report():
