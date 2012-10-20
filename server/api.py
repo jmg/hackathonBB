@@ -1,8 +1,5 @@
 from app import app
 
-from functools import wraps
-from flask import request, Response
-
 from models import *
 from utils import *
 import crud
@@ -35,6 +32,13 @@ def delete_entity(resource, entity_id):
     resource_class = get_resource_class(resource)
     return crud.delete(resource_class, entity_id)
 
-@app.route("/report/")
-def report():
-    pass
+@app.route("/report/progress/<user_id>/", methods=["GET"])
+def progress(user_id):
+    try:
+        return response_success(data=User.get(_id=user_id).progress())
+    except:
+        return response_error()
+
+@app.route("/tags/", methods=["GET"])
+def tags():
+    return response_success(data=Tag.all_json())
