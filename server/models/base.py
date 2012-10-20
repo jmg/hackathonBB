@@ -5,8 +5,6 @@ from settings import BACKEND
 class BaseModel(ValidatingStruct):
 
     __DOCUMENT_DB__ = BACKEND
-    
-    not_from_user = False
 
     def validate(self):
 

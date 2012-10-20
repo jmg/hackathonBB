@@ -11,35 +11,47 @@ def get_resource_class(resource):
 
     return globals().get(resource.capitalize())
 
-@app.route("/<resource>/", methods=["GET"])
+@app.route("/crud/<resource>/", methods=["GET"])
 def list_entity(resource):
 
     resource_class = get_resource_class(resource)
     return response_success(params={"data":crud.all(resource_class, request=request)})
 
-@app.route("/<resource>/", methods=["POST"])
+@app.route("/crud/<resource>/", methods=["POST"])
 def create_entity(resource):
 
     resource_class = get_resource_class(resource)
     return crud.save(resource_class, request)
 
-@app.route("/<resource>/<entity_id>/", methods=["GET"])
+@app.route("/crud/<resource>/<entity_id>/", methods=["GET"])
 def get_entity(resource, entity_id):
 
     resource_class = get_resource_class(resource)
     return crud.get(resource_class, entity_id)
 
-@app.route("/<resource>/<entity_id>/", methods=["PUT"])
+@app.route("/crud/<resource>/<entity_id>/", methods=["PUT"])
 def update_entity(resource, entity_id):
 
     resource_class = get_resource_class(resource)
     return crud.save(resource_class, request, entity_id=entity_id)
 
-@app.route("/<resource>/<entity_id>/", methods=["DELETE"])
+@app.route("/crud/<resource>/<entity_id>/", methods=["DELETE"])
 def delete_entity(resource, entity_id):
 
     resource_class = get_resource_class(resource)
     return crud.delete(resource_class, entity_id)
+
+@app.route("/account/create/", methods=["POST"])
+def create_account():
+
+    username = request.form.get("username")
+    password = request.form.get("password")
+
+    user = User(username=username, password=password)
+    user.save()
+
+    set_user(user)
+    return response_success()
 
 @app.route("/expectation/", methods=["GET"])
 def get_expectation():
