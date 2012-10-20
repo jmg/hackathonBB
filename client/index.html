@@ -17,37 +17,43 @@
 <html>
 <head>
     <title>Cents</title>
-    <link href="styles.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="geo.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="bbui/bbUI.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/webworks-1.0.2.9.js"></script>
+    <script type="text/javascript" src="js/menu.js"></script>
+    <script type="text/javascript" src="bbui/core.js"></script>
 </head>
 
 <body>
 	<div id="container">
 		<div id="top">
-		</div>
-		<div id="main">
+      <div data-bb-type="pill-buttons">
+          <div data-bb-type="pill-button" data-bb-selected="true" onclick="selectAdd()">Add</div>
+          <div data-bb-type="pill-button" onclick="selectEdit()">Edit</div>
+          <div data-bb-type="pill-button" onclick="selectTags()">Tags</div>
+          <div data-bb-type="pill-button" onclick="selectConfig()">Config</div>
+      </div>
 		</div>
 
 		<!-- Login page -->
-		<div class="page-login">
+		<div data-bb-type="round-panel" id="page-login">
 		</div>
 
 		<!-- Add page -->
-		<div class="page-add">
+		<div data-bb-type="round-panel" id="page-add">
 		</div>
 
 		<!-- Edit page -->
-		<div class="page-edit">
+		<div data-bb-type="round-panel" id="page-edit">
 		</div>
 
 		<!-- Tag page -->
-		<div class="page-tag">
+		<div data-bb-type="round-panel" id="page-tag">
 		</div>
 
 		<!-- Config page -->
-		<div class="page-config">
+		<div data-bb-type="round-panel" id="page-config">
 		</div>
-
 
 	</div>
 </body>
