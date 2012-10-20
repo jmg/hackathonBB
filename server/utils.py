@@ -1,4 +1,5 @@
 from flask import request, Response, session
+from models import User
 
 try:
     import simplejson as json
@@ -43,6 +44,7 @@ def json_response(params={}, success=True):
     return response_error(params=params)
 
 def get_user():
+    return User.get()
     return session["authorization"]
 
 def set_user(user):

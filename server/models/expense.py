@@ -15,7 +15,7 @@ class Expense(Movement):
         if tag is not None:
             kwargs['tag_id'] = Tag.get(name=tag)['_id']
 
-        expenses = sorted(cls.all(**kwargs), key=lambda x: float(x['cost']), reversed=True)
+        expenses = sorted(cls.all(**kwargs), key=lambda x: float(x['cost']), reverse=True)
 
-        return expenses[:5]
+        return [ x.json for x in expenses[:5] ]
 

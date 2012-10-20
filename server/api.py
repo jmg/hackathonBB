@@ -100,14 +100,14 @@ def change_password():
 @app.route("/report/progress/", methods=["GET"])
 def progress():
     try:
-        return response_success(data={'progress':User.get(_id=get_user()['_id']).progress()})
+        return response_success(data=User.get(_id=get_user()['_id']).progress())
     except:
         return response_error()
 
 @app.route("/report/expenses/", methods=["GET"])
 def expenses_by_user():
     try:
-        return crud.all("expense")
+        return response_success(params={'data':Expense.all_json(user_id=get_user()['_id'])})
     except:
         return response_error()
 
@@ -122,7 +122,7 @@ def expenses_by_tag(tag):
 @app.route("/report/expenses_top/", methods=["GET"])
 def top_expenses():
     try:
-        return response_success(data=Expense.top(user_id=get_user()['_id']))
+        return response_success(params={'data':Expense.top(user_id=get_user()['_id'])})
     except:
         return response_error()
 
