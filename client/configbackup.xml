@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets"
+        xmlns:rim="http://www.blackberry.com/ns/widgets"
+        version="0.1" id="cent">
+ 
+  <rim:navigation mode="focus" />
+  <author href="http://www.florenciamincucci.com.ar"
+          rim:copyright="Copyright 2012">Pennies</author>
+ 
+  <name>Cent</name>
+ 
+  <description>
+    Registrá tus gastos.
+  </description>
+
+  <!--<icon src="icons/icon-150.png"/>
+ 
+  <rim:splash src="splash-1280x768.png"/>
+  <rim:splash src="splash-768x1280.png"/>-->
+ 
+  <content src="index.htm" rim:allowInvokeParams="true"/>
+  <access uri="http://chart.apis.google.com" subdomains="true" />
+ 
+  <feature id="blackberry.app">
+    <param name="backgroundColor" value="0x00000000" />
+  </feature>
+
+  <feature id="blackberry.system.event" />
+  <feature id="blackberry.push" />
+  <feature id="blackberry.menu" />
+  <feature id="blackberry.dialog" />
+  <feature id="blackberry.app" />
+  <feature id="blackberry.app.event"/>
+ 
+</widget>
