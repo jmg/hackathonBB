@@ -54,6 +54,19 @@ def expenses_by_tag(user_id, tag):
     except:
         return response_error()
 
+@app.route("/report/expenses/top/<user_id>/", methods=["GET"])
+def top_expenses(user_id):
+    try:
+        return response_success(data=Expense.top(user_id=user_id))
+    except:
+        return response_error()
+
+@app.route("/report/expenses/top_by_tag/<user_id>/<tag>/", methods=["GET"])
+def top_expenses_for(user_id, tag):
+    try:
+        return response_success(data=Expense.top(tag=tag, user_id=user_id))
+    except:
+        return response_error()
 
 @app.route("/tags/", methods=["GET"])
 def tags():
