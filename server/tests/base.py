@@ -14,13 +14,17 @@ class TestApiBase(unittest.TestCase):
         self.user = User(username="test", password="test", email="test@test.com")
         self.user.save()
 
+    def login(self):
+        response = self.get_json_from_post("/login/", {"username": "test", "password": "test"})
+
     def setUp(self):
 
         app.testing = True
         self.client = app.test_client()
 
         self.create_user()
-        
+        self.login()
+
         self.create_tags()
         self.user.save()
         self.docs = []

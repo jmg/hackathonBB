@@ -7,9 +7,6 @@ class AuthTest(TestApiBase):
 
         TestApiBase.setUp(self)
 
-    def create_user(self):
-        pass
-
     def test_auth(self):
 
         response = self.get_json_from_post("/login/", {"username": "test", "password": "test"})
@@ -26,6 +23,6 @@ class AuthTest(TestApiBase):
 
     def test_password(self):
 
-        response = self.get_json_from_post("/login/", {"username": "test", "password": "test"})
+        self.login()
         response = self.get_json_from_post("/password/change/", {"password": "test"})
         self.assertEquals(response["status"], "ok")        
