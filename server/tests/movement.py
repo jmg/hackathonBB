@@ -24,7 +24,7 @@ class MovementTest(TestApiBase):
         self.assertEquals(response["name"], "test")
         self.assertEquals(response["cost"], "100")
 
-    def test_update(self):
+    def _test_update(self):
 
         response = self.get_json_from_request("/%s/%s/" % (self.movement_type, self.movement["_id"]), {"name": "new_value"}, method="put")
         self.assertEquals(response["status"], "ok")
@@ -32,7 +32,7 @@ class MovementTest(TestApiBase):
         response = self.get_json_from_get("/%s/%s/" % (self.movement_type, self.movement["_id"]))
         self.assertEquals(response["name"], "new_value")
 
-    def test_delete(self):
+    def _test_delete(self):
 
         self.new_movement = self.create()["data"]
         response = self.get_json_from_request("/%s/%s/" % (self.movement_type, self.new_movement["_id"]), method="delete")

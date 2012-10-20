@@ -6,7 +6,7 @@ class User(BaseModel):
 
     __PRIMARY_KEY__ = 'username'
 
-    not_empty_fields = ['username', 'password', 'email']
+    not_empty_fields = ['username', 'password']
 
     def progress(self):
         from models.expense import Expense
@@ -19,3 +19,4 @@ class User(BaseModel):
         total_savings = sum(float(x['cost']) for x in savings)
 
         return int((float(expectation['cost']) - total_savings * 100) / float(expectation['cost']))
+

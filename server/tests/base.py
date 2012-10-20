@@ -10,11 +10,21 @@ from models import User, Tag
 
 class TestApiBase(unittest.TestCase):
 
+    def create_user(self):
+        self.user = User(username="test", password="test", email="test@test.com")
+        self.user.save()
+
+    def login(self):
+        response = self.get_json_from_post("/login/", {"username": "test", "password": "test"})
+
     def setUp(self):
 
         app.testing = True
         self.client = app.test_client()
-        self.user = User(username="test", password="test", email="test@test.com")
+
+        self.create_user()
+        self.login()
+
         self.create_tags()
         self.user.save()
         self.docs = []
