@@ -1,13 +1,14 @@
 		<script type="text/javascript" src="js/menu.js"></script>
-		<div id="top">
-      <div data-bb-type="pill-buttons">
+		<script type="text/javascript" src="js/add.js"></script>
+
+		<div data-bb-type="pill-buttons">
           <div data-bb-type="pill-button" data-bb-selected="true" onclick="selectAdd()">Add</div>
           <div data-bb-type="pill-button" onclick="selectEdit()">Edit</div>
           <div data-bb-type="pill-button" onclick="selectTags()">Tags</div>
           <div data-bb-type="pill-button" onclick="selectReports()">Reports</div>
           <div data-bb-type="pill-button" onclick="selectConfig()">Config</div>
-      </div>
-		</div>
+    </div>
+
 
 		<!-- Login page -->
 		<div data-bb-type="round-panel" id="page-login" style="display:none;">
@@ -21,10 +22,8 @@
 				<select data-bb-style="stretch" id="trantype">
           <option value="expense" selected="true">Expense</option>
           <option value="income">Income</option>
-          <option value="goal">Goal</option>
       	</select>
 			</div>
-
 			<div data-bb-type="label-control-container">
 				<div data-bb-type="row">
 					<div data-bb-type="label">Amount</div>
@@ -36,9 +35,16 @@
 				</div>
 				<div data-bb-type="row">
 					<div data-bb-type="label">Tag</div>
-					<input type="text" value="Food" />
+					<select data-bb-style="stretch" id="trantype">
+         		<option value="food" selected="true">Food</option>
+         		<option value="fun">Fun</option>
+         		<option value="trips">Trips</option>
+      		</select>
 				</div>
 			</div>
+
+			<div data-bb-type="button" onclick="alert('saving')" >Save</div>
+
 		</div>
 
 		<!-- Edit page -->
@@ -85,8 +91,9 @@
 				</div>
 				<div data-bb-type="row">
 					<div data-bb-type="label">Password</div>
-					<input type="text" value="Lunch" />
+					<input type="password" value="Lunch" />
 				</div>
 
 		</div>
 
+   
